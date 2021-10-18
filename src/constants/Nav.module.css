@@ -1,0 +1,21 @@
+.header {
+  background-color: #06a167;
+  background-image: linear-gradient(315deg, #1a082d 0%, #50ad7f 74%);
+  height: 2em;
+  padding: 1em;
+}
+
+.header > nav {
+  display: flex;
+}
+
+.navLink {
+  color: white;
+  font-weight: bold;
+  text-decoration: none;
+  padding-right: 1em;
+}
+
+:global .page {
+  text-align: center;
+}
