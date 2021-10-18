@@ -2,7 +2,7 @@
   "name": "ts-rtk-shop-api",
   "version": "0.1.0",
   "git": "https://github.com/prabhat-cn/typdescript-rtk-shop-api.git",
-  "netlify": "",
+  "netlify": "https://ts-rtk-shop-api.netlify.app/",
   "private": true,
   "dependencies": {
     "@reduxjs/toolkit": "^1.6.2",
