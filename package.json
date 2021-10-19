@@ -5,6 +5,7 @@
   "netlify": "https://ts-rtk-shop-api.netlify.app/",
   "code-help": "https://programming.vip/docs/using-typescript-to-write-react-router-5.html",
   "img-lazy-load": "https://www.npmjs.com/package/react-lazy-load-image-component",
+  "git-token": "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",
   "private": true,
   "dependencies": {
     "@reduxjs/toolkit": "^1.6.2",
