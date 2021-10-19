@@ -4,6 +4,8 @@ import React, { useEffect, useState } from 'react';
 import Modal from 'react-modal';
 import styles from './Products.module.css';
 import { useAppSelector, useAppDispatch } from '../store/reducers/hooks';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import 'react-lazy-load-image-component/src/effects/blur.css';
 import {
   listProducts,
   Product,
@@ -77,16 +79,26 @@ const Products: React.FC = () => {
                   <div className="col-xs">
                     {product.photos &&
                       product.photos.map((imgs) => (
-                        <img
-                          className="sizes"
-                          style={{ width: '60px', margin: '0 4px' }}
+                        <LazyLoadImage
+                          style={{
+                            width: '60px',
+                            margin: '0 4px',
+                            border: '1px',
+                          }}
                           src={imgs}
+                          delayTime={300}
+                          effect="blur"
                         />
                       ))}
                   </div>
                   <article className={styles.product}>
                     <figure>
-                      <img src={product.preview} alt={product.name} />
+                      <LazyLoadImage
+                        src={product.preview}
+                        alt={product.name}
+                        delayTime={300}
+                        effect="blur"
+                      />
                       <figcaption className={styles.caption}>
                         {product.name}
                       </figcaption>
@@ -150,10 +162,12 @@ const Products: React.FC = () => {
           <h2>{singleProduct?.name}</h2>
           <div className="row">
             <div className="col-xs-4 col-sm-4">
-              <img
+              <LazyLoadImage
                 className="prev-class"
                 src={singleProduct.preview}
                 alt={singleProduct?.name}
+                delayTime={500}
+                effect="blur"
               />
               <p>
                 Brand: <strong>{singleProduct?.brand}</strong>
@@ -165,10 +179,12 @@ const Products: React.FC = () => {
               <div className="col-xs">
                 {singleProduct?.photos &&
                   singleProduct?.photos.map((imgs) => (
-                    <img
+                    <LazyLoadImage
                       className="sizes top-mar"
                       style={{ width: '60px' }}
                       src={imgs}
+                      delayTime={500}
+                      effect="blur"
                     />
                   ))}
 

@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../store/reducers/hooks';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import 'react-lazy-load-image-component/src/effects/blur.css';
 import {
   getPriceTotal,
   removeFromCart,
@@ -55,10 +57,12 @@ const Cart: React.FC = () => {
               {Object.entries(items).map(([id, quantity]) => (
                 <tr key={products[id]?.id}>
                   <td>
-                    <img
+                    <LazyLoadImage
                       style={{ width: '50px' }}
                       src={products[id]?.preview}
                       alt={products[id]?.name}
+                      delayTime={500}
+                      effect="blur"
                     />
                   </td>
                   <td>{products[id]?.name}</td>

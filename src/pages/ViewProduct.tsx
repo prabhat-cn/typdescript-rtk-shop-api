@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../store/reducers/hooks';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import 'react-lazy-load-image-component/src/effects/blur.css';
 
 import { Product, getProduct } from '../store/actions/ProductAction';
 import API from '../api';
@@ -44,14 +46,21 @@ const ViewProduct: React.FC = () => {
   return (
     <div className="container view-cont">
       <div className="view-inn">
-        <h2>{singleProduct?.name}</h2>
+        <div className="row">
+          <h2>{singleProduct?.name}</h2>
+          <Link to="/products" style={{ margin: '0 auto' }}>
+            Back to Product
+          </Link>
+        </div>
         <div className="row row-inn">
           <div className="col-sm-4">
             <div className="left-inner">
-              <img
+              <LazyLoadImage
                 className="prev-class"
                 src={singleProduct.preview}
                 alt={singleProduct?.name}
+                delayTime={500}
+                effect="blur"
               />
             </div>
           </div>
@@ -67,10 +76,12 @@ const ViewProduct: React.FC = () => {
             <div className="col-xs">
               {singleProduct?.photos &&
                 singleProduct?.photos.map((imgs) => (
-                  <img
+                  <LazyLoadImage
                     className="sizes top-mar"
                     style={{ width: '60px' }}
                     src={imgs}
+                    delayTime={500}
+                    effect="blur"
                   />
                 ))}
 
