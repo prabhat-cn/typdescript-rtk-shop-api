@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "git": "https://github.com/prabhat-cn/typdescript-rtk-shop-api.git",
   "netlify": "https://ts-rtk-shop-api.netlify.app/",
+  "code-help": "https://programming.vip/docs/using-typescript-to-write-react-router-5.html",
   "private": true,
   "dependencies": {
     "@reduxjs/toolkit": "^1.6.2",
