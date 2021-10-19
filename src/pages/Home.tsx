@@ -1,9 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const Home = () => {
+const Home: React.FC = () => {
   return (
-    <div>
+    <div className="home-center">
       <h1>Welcome To Our Store</h1>
       <Link to="/products">
         <img
@@ -22,6 +22,9 @@ const Home = () => {
 export default Home;
 
 const homeCss = `
+.home-center {
+  text-align: center;
+}
 img.home-cart {
   width: 40rem;
   border: 2px solid #000;

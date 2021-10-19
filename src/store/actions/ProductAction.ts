@@ -33,7 +33,7 @@ export const getProduct = createAsyncThunk<
   { state: RootState }
 >('getProduct', async ({ id }) => {
   const response = await API.get(`/product/${id}`);
-  console.log('getProduct', response);
+  // console.log('getProduct', response);
 
   return response.data as Product;
 });

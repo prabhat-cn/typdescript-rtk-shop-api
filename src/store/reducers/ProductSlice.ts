@@ -53,7 +53,8 @@ const ProductSlice = createSlice({
     builder.addCase(
       getProduct.fulfilled,
       (state, action: PayloadAction<Product>) => {
-        // state.viewProductState = action.payload;
+        console.log('action', action.payload);
+        state.productItem = action.payload;
         state.viewProductState = 'READY';
       }
     );
