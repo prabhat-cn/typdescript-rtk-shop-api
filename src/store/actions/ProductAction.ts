@@ -37,3 +37,8 @@ export const getProduct = createAsyncThunk<
 
   return response.data as Product;
 });
+
+export async function getProducts(): Promise<Product[]> {
+  const response = await API.get(`/product`);
+  return response.data as Product[];
+}

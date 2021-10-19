@@ -1,10 +1,6 @@
-import {
-  createSlice,
-  createAsyncThunk,
-  PayloadAction,
-  createSelector,
-} from '@reduxjs/toolkit';
-import { checkout } from '../../app/operation';
+import { createSlice, PayloadAction, createSelector } from '@reduxjs/toolkit';
+import { checkoutCart } from '../actions/CartAction';
+
 import { RootState } from '../store';
 
 export type CheckoutState = 'LOADING' | 'READY' | 'ERROR';
@@ -20,17 +16,6 @@ const initialState: CartState = {
   checkoutState: 'READY',
   errorMessage: '',
 };
-
-export const checkoutCart = createAsyncThunk<
-  { success: boolean },
-  undefined,
-  { state: RootState }
->('checkoutCart', async (_, thunkAPI) => {
-  const state = thunkAPI.getState();
-  const items = state.cart.items;
-  const response = await checkout(items);
-  return response;
-});
 
 const cartSlice = createSlice({
   name: 'cart',
@@ -63,13 +48,14 @@ const cartSlice = createSlice({
     builder.addCase(
       checkoutCart.fulfilled,
       (state, action: PayloadAction<{ success: boolean }>) => {
-        const { success } = action.payload;
-        if (success) {
-          state.checkoutState = 'READY';
-          state.items = {};
-        } else {
-          state.checkoutState = 'ERROR';
-        }
+        state.checkoutState = 'READY';
+        // const { success } = action.payload;
+        // if (success) {
+        //   state.checkoutState = 'READY';
+        //   state.items = {};
+        // } else {
+        //   state.checkoutState = 'ERROR';
+        // }
       }
     );
     builder.addCase(checkoutCart.rejected, (state, action) => {
@@ -107,15 +93,15 @@ export const getMemorizedNumItems = createSelector(
   }
 );
 
-// export const getTotalPrice = createSelector(
-//   // 3 Fun
-//   (state: RootState) => state.cart.items,
-//   (state: RootState) => state.products.products,
-//   (items, products) => {
-//     let total = 0;
-//     for (let id in items) {
-//       total += products[id].price * items[id];
-//     }
-//     return total.toFixed(2);
-//   }
-// );
+export const getPriceTotal = createSelector(
+  // 3 Fun
+  (state: RootState) => state.cart.items,
+  (state: RootState) => state.products.products,
+  (items, products) => {
+    let total = 0;
+    for (let id in items) {
+      total += products[id].price * items[id];
+    }
+    return total.toFixed(2);
+  }
+);

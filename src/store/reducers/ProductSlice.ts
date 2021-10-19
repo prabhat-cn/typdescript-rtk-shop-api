@@ -16,6 +16,7 @@ export interface ShowProduct {
 const initialState: ShowProduct = {
   products: {},
   productsItem: [],
+  // productsItem: {},
   productItem: {} as Product,
   productState: 'READY',
   viewProductState: 'READY',
@@ -27,7 +28,14 @@ const ProductSlice = createSlice({
   initialState: initialState,
 
   // normal actions create here
-  reducers: {},
+  reducers: {
+    receivedProducts(state, action: PayloadAction<Product[]>) {
+      const products = action.payload;
+      products.forEach((product) => {
+        state.products[product.id] = product;
+      });
+    },
+  },
 
   extraReducers: function (builder) {
     // get Products
@@ -41,6 +49,13 @@ const ProductSlice = createSlice({
         state.productState = 'READY';
       }
     );
+    // builder.addCase(
+    //   listProducts.fulfilled,
+    //   (state, action: PayloadAction<Product>) => {
+    //     state.products = action.payload;
+    //     state.productState = 'READY';
+    //   }
+    // );
     builder.addCase(listProducts.rejected, (state, action) => {
       state.productState = 'ERROR';
       state.errorMessage = action.error.message || '';
@@ -65,4 +80,5 @@ const ProductSlice = createSlice({
   },
 });
 
+export const { receivedProducts } = ProductSlice.actions;
 export default ProductSlice.reducer;

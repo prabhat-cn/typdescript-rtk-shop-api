@@ -7,7 +7,7 @@ import { getMemorizedNumItems } from '../store/reducers/CartSlice';
 const CartIcon = () => {
   const numItems = useAppSelector(getMemorizedNumItems);
   return (
-    <Link to="/" className={styles.link}>
+    <Link to="/cart" className={styles.link}>
       <span className={styles.text}>
         🛒&nbsp;&nbsp;{numItems ? numItems : 'Cart'}
       </span>

@@ -8,14 +8,12 @@ import {
   listProducts,
   Product,
   getProduct,
-  getProducts,
 } from '../store/actions/ProductAction';
 
 import { addToCart } from '../store/reducers/CartSlice';
 
 import API from '../api';
 import { Link } from 'react-router-dom';
-import { receivedProducts } from '../store/reducers/ProductSlice';
 
 const Products: React.FC = () => {
   const customStyles = {
@@ -32,8 +30,7 @@ const Products: React.FC = () => {
   const [viewProductData, setViewProductData] = useState<Product>();
 
   const dispatch = useAppDispatch();
-  // const productsList = useAppSelector((state) => state.products.productsItem);
-  const productsList = useAppSelector((state) => state.products.products);
+  const productsList = useAppSelector((state) => state.products.productsItem);
   // console.log('productsList', productsList);
 
   const singleProduct = useAppSelector((state) => state.products.productItem);
@@ -60,11 +57,7 @@ const Products: React.FC = () => {
   // };
 
   useEffect(() => {
-    // dispatch(listProducts());
-    getProducts().then((products) => {
-      console.log('products->', products);
-      dispatch(receivedProducts(products));
-    });
+    dispatch(listProducts());
   }, []);
   return (
     <>
@@ -72,7 +65,7 @@ const Products: React.FC = () => {
         <main className="page">
           <ul className={styles.products}>
             {productsList &&
-              Object.values(productsList)?.map((product: Product) => (
+              productsList?.map((product: Product) => (
                 <li key={product.id}>
                   <div className="col-xs">
                     {product.photos &&
